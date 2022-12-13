@@ -43,11 +43,7 @@ let todos = [
 app.get('/todos', (req, res) => res.send(todos));
 
 app.post('/todos', (req, res) => {
-  const todo = { 
-    title: req.body.title,
-    id: nanoid(),
-    completed: false
-  };
+  const todo = { title: req.body.title, id: nanoid(), completed: false };
   todos.push(todo);
   return res.send(todo);
 });
@@ -72,6 +68,6 @@ app.delete('/todos/:id', (req, res) => {
   res.send(todos);
 });
 
-const PORT = 6000;
+const PORT = 2000;
 
 app.listen(PORT, console.log(`Server running on port ${PORT}`.green.bold));
