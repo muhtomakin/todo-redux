@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addTodosAsync, getTodosAsync, removeTodosAsync, toggleTodosAsync } from "./services";
+import { addTodosAsync, clearTodosAsync, getTodosAsync, removeTodosAsync, toggleTodosAsync } from "./services";
 
 
 export const todosSlice = createSlice({
@@ -40,10 +40,10 @@ export const todosSlice = createSlice({
         changeActiveFilter: (state, action) => {
             state.activeFilter = action.payload;
         },
-        clearCompleted: (state) => {
-            const filtered = state.items.filter(item => item.completed === false);
-            state.items = filtered;
-        }
+        // clearCompleted: (state) => {
+        //     const filtered = state.items.filter(item => item.completed === false);
+        //     state.items = filtered;
+        // }
     },
     extraReducers: {
         [getTodosAsync.pending]: (state) => {
@@ -74,11 +74,13 @@ export const todosSlice = createSlice({
             state.items[index].completed = completed;
         },
         [removeTodosAsync.fulfilled]: (state, action) => {
-            console.log(action.payload);
             const id = action.payload;
             const index = state.items.findIndex((item) => item.id === id);
             state.items.splice(index, 1);
         },
+        [clearTodosAsync.fulfilled]: (state, action) => {
+            state.items = action.payload;
+        }
     }
 });
 
