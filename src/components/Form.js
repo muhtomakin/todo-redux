@@ -23,6 +23,7 @@ function Form() {
       style={{ display: 'flex', alignItems: 'center'}}
     >
       <input 
+        disabled={isLoading}
         className="new-todo" 
         placeholder="What needs to be done?" 
         autoFocus 
